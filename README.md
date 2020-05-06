@@ -7,4 +7,4 @@ All orders of a table are calculated together and a bill is created automaticall
 The option that different clients and their families are sitting on the same table will also be considered.
 
 ## the project is realised with:
-websites paired with JavaScript and Node.js with different npm packages(nedb, ...).
+websites paired with JavaScript and Node.js with different npm packages (express, fs, nedb).
