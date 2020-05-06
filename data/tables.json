@@ -1,0 +1,76 @@
+[
+    {
+        "id": 0,
+        "name": "Bar",
+        "familien": [
+            {
+                "fid": 0,
+                "name": "Barkeeper",
+                "personen": 3
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Table 1",
+        "familien": [
+            {
+                "fid": 1,
+                "name": "Müller",
+                "personen": 5
+            },
+            {
+                "fid": 2,
+                "name": "Maier",
+                "personen": 3
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Table 2",
+        "familien": [
+            {
+                "fid": 3,
+                "name": "Schneider",
+                "personen": 2
+            },
+            {
+                "fid": 4,
+                "name": "Folga",
+                "personen": 4
+            },
+            {
+                "fid": 5,
+                "name": "Pups",
+                "personen": 1
+            },
+            {
+                "fid": 6,
+                "name": "Hamma",
+                "personen": 1
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Table 3",
+        "familien": [
+            {
+                "fid": 7,
+                "name": "Kunz",
+                "personen": 6
+            },
+            {
+                "fid": 8,
+                "name": "Upaka",
+                "personen": 1
+            },
+            {
+                "fid": 9,
+                "name": "von Gera",
+                "personen": 1
+            }
+        ]
+    }
+]

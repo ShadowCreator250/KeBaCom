@@ -1,0 +1,87 @@
+#list {
+    border: 1px solid black;
+}
+
+.accordionWrapper{
+    display: block;
+    position: relative;
+    padding:10px;
+    background:#fff;
+    float:left;
+    width:95%;
+    height: auto;
+    box-sizing:border-box;
+    margin: 10px;
+    box-shadow: 0 1.5em 85px 0 rgba(0, 0, 0, 0.2);
+}
+.accordionItem{
+    display: block;
+    display:block;
+    width:100%;
+    box-sizing: border-box;
+    font-family:'Open-sans',Arial,sans-serif;
+    height: auto;
+    width: auto;
+}
+.accordionItemHeading{
+    display: block;
+    position: relative;
+    top: 5px;
+    cursor:pointer;
+    margin:0px 0px 10px 0px;
+    padding:10px;
+    background:#2980b9;
+    color:#fff;
+    height: auto;
+    width:100%;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+
+.close .accordionItemContent{
+    height:0px;
+    transform: scaleY(0);
+    width: 100%;
+    transform-origin: bottom;
+    transition: transform 0.1s ease-out;
+    display:block;
+}
+.open .accordionItemContent{
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin: 0px 0px 5px 0px;
+    display:block;
+	transform: scaleY(1);
+	transform-origin: top;
+	transition: transform 0.4s ease-in;
+    box-sizing: border-box;
+}
+
+.open .accordionItemHeading{
+    margin:0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: #bdc3c7;
+    color: #7f8c8d;
+}
+.open .accordionItemHeading::after{
+    content: " - "; 
+    color: white; 
+    float: right; 
+    font-size: 1.6em;
+    position: relative;
+    bottom: 7px;
+}
+.close .accordionItemHeading::after{
+    content: " + "; 
+    color: white; 
+    float: right; 
+    font-size: 1.6em;
+    position: relative;
+    bottom: 4px;
+}

@@ -1,0 +1,72 @@
+[
+    {
+        "gruppenname": "Möbel",
+        "inhalt": [
+            {
+                "id": 1,
+                "name": "Stuhl",
+                "preis": 3.5,
+                "zutaten": [
+                    "Beine",
+                    "Sitzfläche",
+                    "Lehne",
+                    "Streben",
+                    "Leim",
+                    "Schrauben"
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Tisch",
+                "preis": 5.0,
+                "zutaten": [
+                    "Beine",
+                    "Platte",
+                    "Lack",
+                    "Tischdecke"
+                ]
+            },
+            {
+                "id": 3,
+                "name": "Sofa",
+                "preis": 6.0,
+                "zutaten": [
+                    "Beine",
+                    "Stoffüberzug",
+                    "Stofffüllung",
+                    "Federn",
+                    "Holz",
+                    "Farbstoff"
+                ]
+            }
+        ]
+    },
+    {
+        "gruppenname": "Lampen",
+        "inhalt": [
+            {
+                "id": 4,
+                "name": "Nachttischlampe",
+                "preis": 1.75,
+                "zutaten": [
+                    "Elektrizität"
+                ]
+            },
+            {
+                "id": 5,
+                "name": "Schreibtischlampe",
+                "preis": 2.6,
+                "zutaten": [
+                    "Volt"
+                ]
+            }
+        ]
+    }
+    ,
+    {
+        "gruppenname": "TST",
+        "inhalt": [
+            
+        ]
+    }
+]

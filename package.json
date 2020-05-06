@@ -1,0 +1,25 @@
+{
+  "name": "kebacom",
+  "version": "0.1",
+  "description": "Kellner-Bar-Communication Project for the GalaDinner 4.0 (JG Paulus)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Kellner",
+    "Bar",
+    "Com",
+    "Kom",
+    "KeBaCom",
+    "GalaDinner",
+    "Gala Dinner"
+  ],
+  "author": "ShadowCreator250",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0",
+	  "filehandler": "^1.1.2"
+  }
+}
