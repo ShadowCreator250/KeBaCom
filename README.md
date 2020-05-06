@@ -8,3 +8,6 @@ The option that different clients and their families are sitting on the same tab
 
 ## the project is realised with:
 websites paired with JavaScript and Node.js with different npm packages (express, fs, nedb).
+
+## project purpose:
+Every 4 years my Christian youth group hosts a gala dinner. I made it my business to try developing a digital communication between server and bar. But with small edits this should also work for a cuisine. 
