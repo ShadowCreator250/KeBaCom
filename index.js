@@ -118,9 +118,6 @@ function server1() {
             response.json(data);
         });
     });
-
-    // TODO: for Admin section: getAll, getConfig, possibility to edit all files under ./data/
-    // TODO: set-able limits for getOpen and the others (+ limitless)
 }
 
 server1();

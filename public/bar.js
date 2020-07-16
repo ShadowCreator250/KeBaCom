@@ -6,18 +6,12 @@ function init() {
     openEle = document.getElementById("in_progress");
     openEle = document.getElementById("ready");
 
-    now = Date.now();
     update();
-    //autoUpdate();
-    //setInterval(autoUpdate, 1000);
+    setInterval(update, 10000);
 }
-function autoUpdate() {
-    if(Date.now() >= now + 10000) {
-        update();
-        now = Date.now();
-    }
-}
+
 function update() {
+    console.log("update");
     getOpen();
     getInProgress();
     getReady();
