@@ -7,8 +7,9 @@ function init() {
     openEle = document.getElementById("ready");
 
     now = Date.now();
-    autoUpdate();
-    setInterval(autoUpdate, 1000);
+    update();
+    //autoUpdate();
+    //setInterval(autoUpdate, 1000);
 }
 function autoUpdate() {
     if(Date.now() >= now + 10000) {

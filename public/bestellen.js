@@ -1,8 +1,8 @@
-var tidselect;
-var famselect;
-var list;
-var tables;
-var items;
+var tidselect; // TableID select element
+var famselect; // FamilyID select element
+var list; // element for selection list
+var tables; // object for the information about the tables
+var items; // object for the information about the items
 
 function init() {
     tidselect = document.getElementById("tableID");
@@ -15,8 +15,6 @@ function init() {
 async function getTables() {
     const response = await fetch("/getTables");
     tables = await response.json();
-
-    // console.log(tables);
     inputTables();
 }
 
@@ -44,7 +42,6 @@ function updateFamNames() {
 async function getItems() {
     const response = await fetch("/getItems");
     items = await response.json();
-    // console.log(items);
     inputItems();
 }
 
@@ -129,13 +126,13 @@ function inputItems() {
 function register_accordion() {
     var accItem = document.getElementsByClassName('accordionItem');
     var accHD = document.getElementsByClassName('accordionItemHeading');
-    for (var i = 0; i < accHD.length; i++) {
-        accHD[i].addEventListener('click', toggleItem, false);
+    for (accHead of accHD) {
+        accHead.addEventListener('click', toggleItem, false);
     }
     function toggleItem() {
         var itemClass = this.parentNode.className;
-        for (var i = 0; i < accItem.length; i++) {
-            accItem[i].className = 'accordionItem close';
+        for (accI of accItem) {
+            accI.className = 'accordionItem close';
         }
         if (itemClass == 'accordionItem close') {
             this.parentNode.className = 'accordionItem open';
@@ -144,8 +141,8 @@ function register_accordion() {
 }
 function register_minus() {
     var minusb = document.getElementsByClassName("minus");
-    for (var i = 0; i < minusb.length; i++) {
-        minusb[i].addEventListener('click', subone, false);
+    for (item of minusb) {
+        item.addEventListener('click', subone, false);
     }
     function subone() {
         var counts = this.nextElementSibling;
@@ -156,8 +153,8 @@ function register_minus() {
 }
 function register_plus() {
     var plusb = document.getElementsByClassName("plus");
-    for (var i = 0; i < plusb.length; i++) {
-        plusb[i].addEventListener('click', addone, false);
+    for (item of plusb) {
+        item.addEventListener('click', addone, false);
     }
     function addone() {
         var counts = this.previousElementSibling;
@@ -167,24 +164,27 @@ function register_plus() {
     }
 }
 
-function sendData() {
+async function sendData() {
     var tableID = parseInt(document.getElementById("tableID").selectedIndex);
     var fid = parseInt(document.getElementById("famName")[document.getElementById("famName").selectedIndex].value);
     
     var counts = document.getElementsByClassName("count");
-    var amounts = []
-    for(var i = 0; i<counts.length; i++) {
-        var count = parseInt(counts[i].innerText);
-        var itemID = parseInt(counts[i].parentElement.parentElement.firstChild.firstChild.innerText);
-        amounts.push({itemID, count})
+    var amounts = [];
+    var notesTxt = document.getElementById("notes").value;
+    for(item of counts) {
+        var count = parseInt(item.innerText);
+        var itemID = parseInt(item.parentElement.parentElement.firstChild.firstChild.innerText);
+        if(count > 0) {
+            amounts.push({itemID, count});
+        }
     }
 
     var data = {
-        "tabeleID" : tableID,
+        "tableID" : tableID,
         "familyID" : fid,
-        order : amounts
+        order : amounts,
+        notes : notesTxt
     };
-    // console.log(data);
 
     var options = {
         method:"post",
@@ -193,10 +193,9 @@ function sendData() {
             "Content-Type": "application/json"
         }
     };
-    var response = fetch("/order", options);
-    const json = response.json();
-    console.log(json);
-
+    var response = await fetch("/sendOrder", options);
+    var respdata = await response.json();
+    //console.log(respdata)
     reset();
 }
 
@@ -208,4 +207,5 @@ function reset() {
     for(var i = 0; i<counts.length; i++) {
         counts[i].innerText = "0";
     }
+    document.getElementById("notes").value = "";
 }

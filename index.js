@@ -1,11 +1,10 @@
 const express = require("express");
 const fs = require('fs');
-const datastore = require("nedb");
+const Datastore = require("nedb");
+const { version } = require("process");
 
 const app = express();
-const fh = new FileHandler();
-const dbtst1 = new datastore("data/dbtst1.db");
-const orders = new datastore("data/orders.db");
+const orders = new Datastore("data/orders.db");
 
 orders.loadDatabase();
 
@@ -45,9 +44,11 @@ this.rename = function(url, newUrl) {
 }
 }
 
-const port = 3001;
+const fh = new FileHandler();
+
+const port = 3567;
 app.listen(port, () => console.log('>Server is listening at port ' + port + "."));
-app.use(express.static('public/'));
+app.use(express.static('./public/'));
 app.use(express.json({limit: "5mb"}));
 
 function server1() {
@@ -64,25 +65,28 @@ function server1() {
         response.json(obj);
     });
     
-    app.post("/order", function(request, response) {
+    app.post("/sendOrder", function(request, response) {
         var configs = fh.read("data/config.json");
         var oID = parseInt((JSON.parse(configs)).nextOrderID);
         var timestamp = Date.now();
-        var data = request.body;
-        data.orderID = oID;
-        data.Opened = timestamp;
-        data.LastEdited = timestamp;
-        data.status = "open";
+        var meta = {};
+        meta.orderID = oID;
+        meta.Opened = timestamp;
+        meta.LastEdited = timestamp;
+        meta.status = "open";
+        var data = Object.assign(meta, request.body);
         orders.insert(data);
+
         configs = configs.replace("\"nextOrderID\" : " + oID, "\"nextOrderID\" : " + (oID+1));
         oID  = oID + 1;
         fh.replace("data/config.json", configs);
+
         response.contentType('application/json');
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.json(data);
+        response.json({status: 200}); // 200 = ok/successful 
     });
     app.get("/getOpen",function(request, response) {
-        orders.find({status:"open"}).limit(5).sort({LastEdited: 1}).exec((err, data) => {
+        orders.find({status:"open"}).limit(0).sort({LastEdited: 1}).exec((err, data) => { //limit=0 -> all ; limit<0 and >0 -> all minus  n ones; 
             if(err) {
                 response.end();
                 return err;
@@ -114,6 +118,9 @@ function server1() {
             response.json(data);
         });
     });
+
+    // TODO: for Admin section: getAll, getConfig, possibility to edit all files under ./data/
+    // TODO: set-able limits for getOpen and the others (+ limitless)
 }
 
 server1();

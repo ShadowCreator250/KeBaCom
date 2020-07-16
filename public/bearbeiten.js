@@ -171,6 +171,7 @@ function sendData() {
     
     var counts = document.getElementsByClassName("count");
     var amounts = []
+    var notesTxt = document.getElementById("notes").value;
     for(var i = 0; i<counts.length; i++) {
         var count = parseInt(counts[i].innerText);
         var itemID = parseInt(counts[i].parentElement.parentElement.firstChild.firstChild.innerText);
@@ -180,9 +181,10 @@ function sendData() {
     var data = {
         "tabeleID" : tableID,
         "familyID" : fid,
-        order : amounts
+        order : amounts,
+        notes : notesTxt
     };
-    // console.log(data);
+    console.log(data);
 
     var options = {
         method:"post",
@@ -191,7 +193,7 @@ function sendData() {
             "Content-Type": "application/json"
         }
     };
-    var response = fetch("/order", options);
+    var response = fetch("/sendOrder", options);
     reset();
 }
 
@@ -203,4 +205,5 @@ function reset() {
     for(var i = 0; i<counts.length; i++) {
         counts[i].innerText = "0";
     }
+    document.getElementById("notes").value = "";
 }
