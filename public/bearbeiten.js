@@ -193,7 +193,7 @@ function sendData() {
             "Content-Type": "application/json"
         }
     };
-    var response = fetch("/sendOrder", options);
+    var response = fetch("/registerOrder", options);
     reset();
 }
 

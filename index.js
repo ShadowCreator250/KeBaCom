@@ -47,46 +47,55 @@ this.rename = function(url, newUrl) {
 const fh = new FileHandler();
 
 const port = 3567;
-app.listen(port, () => console.log('>Server is listening at port ' + port + "."));
+app.listen(port, () => console.log('>Server is listening on port ' + port + "."));
 app.use(express.static('./public/'));
 app.use(express.json({limit: "5mb"}));
 
 function server1() {
     app.get("/getTables", function(request, response) {
-        var obj = JSON.parse(fh.read("data/tables.json"));
+        let obj = JSON.parse(fh.read("data/tables.json"));
         response.contentType('application/json');
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.json(obj);
     });
     app.get("/getItems", function(request, response) {
-        var obj = JSON.parse(fh.read("data/items.json"));
+        let obj = JSON.parse(fh.read("data/items.json"));
+        response.contentType('application/json');
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.json(obj);
+    });
+    app.get("/getConfig", function(request, response) {
+        let obj = JSON.parse(fh.read("data/config.json"));
         response.contentType('application/json');
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.json(obj);
     });
     
-    app.post("/sendOrder", function(request, response) {
-        var configs = fh.read("data/config.json");
-        var oID = parseInt((JSON.parse(configs)).nextOrderID);
-        var timestamp = Date.now();
-        var meta = {};
+    app.post("/registerOrder", function(request, response) {
+        let config = JSON.parse(fh.read("data/config.json"));
+        let oID = config.nextOrderID;
+        let timestamp = Date.now();
+        let meta = {};
         meta.orderID = oID;
-        meta.Opened = timestamp;
-        meta.LastEdited = timestamp;
+        meta.opened = timestamp;
+        meta.lastEdited = timestamp;
         meta.status = "open";
-        var data = Object.assign(meta, request.body);
+        let data = Object.assign(meta, request.body);
         orders.insert(data);
 
-        configs = configs.replace("\"nextOrderID\" : " + oID, "\"nextOrderID\" : " + (oID+1));
+        config.nextOrderID = oID+1;
+        config.lastEdited = timestamp;
         oID  = oID + 1;
-        fh.replace("data/config.json", configs);
+        fh.replace("data/config.json", JSON.stringify(config));
 
         response.contentType('application/json');
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.json({status: 200}); // 200 = ok/successful 
     });
-    app.get("/getOpen",function(request, response) {
-        orders.find({status:"open"}).limit(0).sort({LastEdited: 1}).exec((err, data) => { //limit=0 -> all ; limit<0 and >0 -> all minus  n ones; 
+
+    app.post("/getOpen",function(request, response) {
+        let options = request.body;
+        orders.find({status:"open"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
@@ -96,8 +105,9 @@ function server1() {
             response.json(data);
         });
     });
-    app.get("/getInProgress",function(request, response) {
-        orders.find({status:"in-progress"}).limit(5).sort({LastEdited: 1}).exec((err, data) => {
+    app.post("/getInProgress",function(request, response) {
+        let options = request.body;
+        orders.find({status:"in-progress"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
@@ -107,8 +117,9 @@ function server1() {
             response.json(data);
         });
     });
-    app.get("/getReady",function(request, response) {
-        orders.find({status:"ready"}).limit(5).sort({LastEdited: 1}).exec((err, data) => {
+    app.post("/getReady",function(request, response) {
+        let options = request.body;
+        orders.find({status:"ready"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
@@ -118,6 +129,15 @@ function server1() {
             response.json(data);
         });
     });
+    app.get("/getAll", function handleData(request, response) {//server->client
+        database.find({}, (err, data) => {
+            if(err) {
+                response.end();
+                return err;
+            }
+            response.json(data);
+        });
+    }); 
 }
 
 server1();

@@ -1,9 +1,14 @@
-{"orderID":5,"Opened":1594854046869,"LastEdited":1594854046869,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":1,"count":1}],"notes":"","_id":"5DCSZHC0TRMka05R"}
-{"orderID":11,"Opened":1594858315883,"LastEdited":1594858315883,"status":"open","tableID":1,"familyID":2,"order":[{"itemID":4,"count":4},{"itemID":5,"count":4}],"notes":"hahaah","_id":"FHA9upMYuPs9RiEQ"}
-{"orderID":4,"Opened":1594853935595,"LastEdited":1594853935595,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"fO8gMqMuKX28JPrv"}
-{"orderID":3,"Opened":1594853786410,"LastEdited":1594853786410,"status":"open","tabeleID":0,"familyID":0,"order":[{"itemID":3,"count":1}],"notes":"","_id":"i3fHN52Zzw71lqVs"}
-{"orderID":10,"Opened":1594854432586,"LastEdited":1594854432586,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"jokIpcMSfPwtGRtO"}
-{"orderID":7,"Opened":1594854131109,"LastEdited":1594854131109,"status":"open","tableID":0,"familyID":0,"order":[],"notes":"","_id":"kwqYH0v17LoybZWn"}
-{"orderID":6,"Opened":1594854112335,"LastEdited":1594854112335,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"ha","_id":"oaYXdJWn53ZYnYXo"}
-{"orderID":8,"Opened":1594854138455,"LastEdited":1594854138455,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":1,"count":1}],"notes":"","_id":"pEzB9m5Z0wErm0Eo"}
-{"orderID":9,"Opened":1594854177850,"LastEdited":1594854177850,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"xAuIZYLwK9PpYPe4"}
+{"orderID":12,"opened":1594939289753,"lastEdited":1594939289753,"status":"open","tableID":2,"familyID":6,"order":[{"itemID":2,"count":1}],"notes":"new config handling tst","_id":"1SFhurAFicyChs60"}
+{"orderID":5,"opened":1594854046869,"lastEdited":1594854046869,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":1,"count":1}],"notes":"","_id":"5DCSZHC0TRMka05R"}
+{"orderID":11,"opened":1594858315883,"lastEdited":1594858315883,"status":"open","tableID":1,"familyID":2,"order":[{"itemID":4,"count":4},{"itemID":5,"count":4}],"notes":"hahaah","_id":"FHA9upMYuPs9RiEQ"}
+{"orderID":13,"opened":1594939705800,"lastEdited":1594939705800,"status":"open","tableID":2,"familyID":4,"order":[{"itemID":1,"count":2},{"itemID":4,"count":1}],"notes":"config.lastEdited tst","_id":"bgr6q6Ty73uLj9LJ"}
+{"orderID":4,"opened":1594853935595,"lastEdited":1594853935595,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"fO8gMqMuKX28JPrv"}
+{"orderID":3,"opened":1594853786410,"lastEdited":1594853786410,"status":"open","tabeleID":0,"familyID":0,"order":[{"itemID":3,"count":1}],"notes":"","_id":"i3fHN52Zzw71lqVs"}
+{"orderID":10,"opened":1594854432586,"lastEdited":1594854432586,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"jokIpcMSfPwtGRtO"}
+{"orderID":7,"opened":1594854131109,"lastEdited":1594854131109,"status":"open","tableID":0,"familyID":0,"order":[],"notes":"","_id":"kwqYH0v17LoybZWn"}
+{"orderID":6,"opened":1594854112335,"lastEdited":1594854112335,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"ha","_id":"oaYXdJWn53ZYnYXo"}
+{"orderID":8,"opened":1594854138455,"lastEdited":1594854138455,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":1,"count":1}],"notes":"","_id":"pEzB9m5Z0wErm0Eo"}
+{"orderID":9,"opened":1594854177850,"lastEdited":1594854177850,"status":"open","tableID":0,"familyID":0,"order":[{"itemID":4,"count":1}],"notes":"","_id":"xAuIZYLwK9PpYPe4"}
+{"orderID":14,"opened":1594942786981,"lastEdited":1594942786981,"status":"open","tableID":0,"familyID":0,"order":[],"notes":"","_id":"up5Tady13UrYnyJ8"}
+{"orderID":15,"opened":1594942897622,"lastEdited":1594942897622,"status":"open","tableID":3,"familyID":9,"order":[],"notes":"","_id":"04GI0feDYpHGPLXe"}
+{"orderID":16,"opened":1594943445125,"lastEdited":1594943445125,"status":"open","tableID":0,"familyID":0,"order":[],"notes":"","_id":"57PNxfYXGO8uU3qP"}

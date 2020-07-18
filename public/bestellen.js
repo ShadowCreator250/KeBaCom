@@ -13,14 +13,14 @@ function init() {
 }
 
 async function getTables() {
-    const response = await fetch("/getTables");
+    let response = await fetch("/getTables");
     tables = await response.json();
     inputTables();
 }
 
 function inputTables() {
     for(item of tables) {
-        var o = document.createElement("option");
+        let o = document.createElement("option");
         o.value = item.id;
         o.text = item.name;
         tidselect.appendChild(o);
@@ -30,9 +30,9 @@ function inputTables() {
 
 function updateFamNames() {
     famselect.innerHTML = "";
-    var index = tidselect.selectedIndex;
+    let index = tidselect.selectedIndex;
     for(fam of tables[index].familien) {
-        var o = document.createElement("option");
+        let o = document.createElement("option");
         o.value = fam.fid;
         o.text = fam.name;
         famselect.appendChild(o);
@@ -40,21 +40,21 @@ function updateFamNames() {
 }
 
 async function getItems() {
-    const response = await fetch("/getItems");
+    let response = await fetch("/getItems");
     items = await response.json();
     inputItems();
 }
 
 function inputItems() {
     for(group of items) {
-        var accorditem = document.createElement("div");
+        let accorditem = document.createElement("div");
         accorditem.classList.add("accordionItem");
         accorditem.classList.add("close");
-        var h = document.createElement("span");
+        let h = document.createElement("span");
         h.classList.add("groupname");
         h.classList.add("accordionItemHeading");
         h.innerText = group.gruppenname;
-        var c = document.createElement("div");
+        let c = document.createElement("div");
         c.classList.add("accordionItemContent");
         c.classList.add("sublist");
 
@@ -62,26 +62,26 @@ function inputItems() {
             c.innerHTML = "<ul><li class=\"empty\">Hier ist nichts!</li></ul>";
         }
         else if(group.inhalt.length >= 1) {
-            for(var i = 0; i < group.inhalt.length; i++) {
-                var ul = document.createElement("ul");
+            for(let i = 0; i < group.inhalt.length; i++) {
+                let ul = document.createElement("ul");
                 ul.classList.add("item");
 
-                var liname = document.createElement("li");
+                let liname = document.createElement("li");
                 liname.classList.add("name");
-                var lipreis = document.createElement("li");
+                let lipreis = document.createElement("li");
                 lipreis.classList.add("price");
-                var lizutaten = document.createElement("li");
+                let lizutaten = document.createElement("li");
                 lipreis.classList.add("ingredients");
-                var lianzahl = document.createElement("li");
+                let lianzahl = document.createElement("li");
                 lianzahl.classList.add("amount");
 
-                var ids = document.createElement("span");
+                let ids = document.createElement("span");
                 ids.classList.add("id");
                 ids.innerText = group.inhalt[i].id;
                 liname.appendChild(ids);
                 
                 lizutaten.innerText = "Zutaten: ";
-                for(var j = 0; j<group.inhalt[i].zutaten.length; j++) {
+                for(let j = 0; j<group.inhalt[i].zutaten.length; j++) {
                     if(j+1 == group.inhalt[i].zutaten.length) {
                         lizutaten.innerText += group.inhalt[i].zutaten[j];
                     }
@@ -90,13 +90,13 @@ function inputItems() {
                     }
                 }
 
-                var bminus = document.createElement("button");
+                let bminus = document.createElement("button");
                 bminus.innerText = "-";
                 bminus.classList.add("minus");
-                var count = document.createElement("span");
+                let count = document.createElement("span");
                 count.classList.add("count");
                 count.innerText = "0";
-                var bplus = document.createElement("button");
+                let bplus = document.createElement("button");
                 bplus.innerText = "+";
                 bplus.classList.add("plus");
                 
@@ -124,13 +124,13 @@ function inputItems() {
 }
 
 function register_accordion() {
-    var accItem = document.getElementsByClassName('accordionItem');
-    var accHD = document.getElementsByClassName('accordionItemHeading');
+    let accItem = document.getElementsByClassName('accordionItem');
+    let accHD = document.getElementsByClassName('accordionItemHeading');
     for (accHead of accHD) {
         accHead.addEventListener('click', toggleItem, false);
     }
     function toggleItem() {
-        var itemClass = this.parentNode.className;
+        let itemClass = this.parentNode.className;
         for (accI of accItem) {
             accI.className = 'accordionItem close';
         }
@@ -140,24 +140,24 @@ function register_accordion() {
     }
 }
 function register_minus() {
-    var minusb = document.getElementsByClassName("minus");
+    let minusb = document.getElementsByClassName("minus");
     for (item of minusb) {
         item.addEventListener('click', subone, false);
     }
     function subone() {
-        var counts = this.nextElementSibling;
+        let counts = this.nextElementSibling;
         if(parseInt(counts.innerText) >= 1) {
             counts.innerText = parseInt(counts.innerText) -1;
         }
     }
 }
 function register_plus() {
-    var plusb = document.getElementsByClassName("plus");
+    let plusb = document.getElementsByClassName("plus");
     for (item of plusb) {
         item.addEventListener('click', addone, false);
     }
     function addone() {
-        var counts = this.previousElementSibling;
+        let counts = this.previousElementSibling;
         if(parseInt(counts.innerText) >= 0) {
             counts.innerText = parseInt(counts.innerText) +1;
         }
@@ -165,36 +165,36 @@ function register_plus() {
 }
 
 async function sendData() {
-    var tableID = parseInt(document.getElementById("tableID").selectedIndex);
-    var fid = parseInt(document.getElementById("famName")[document.getElementById("famName").selectedIndex].value);
+    let tableID = parseInt(document.getElementById("tableID").selectedIndex);
+    let fid = parseInt(document.getElementById("famName")[document.getElementById("famName").selectedIndex].value);
     
-    var counts = document.getElementsByClassName("count");
-    var amounts = [];
-    var notesTxt = document.getElementById("notes").value;
+    let counts = document.getElementsByClassName("count");
+    let amounts = [];
+    let notesTxt = document.getElementById("notes").value;
     for(item of counts) {
-        var count = parseInt(item.innerText);
-        var itemID = parseInt(item.parentElement.parentElement.firstChild.firstChild.innerText);
+        let count = parseInt(item.innerText);
+        let itemID = parseInt(item.parentElement.parentElement.firstChild.firstChild.innerText);
         if(count > 0) {
             amounts.push({itemID, count});
         }
     }
 
-    var data = {
-        "tableID" : tableID,
-        "familyID" : fid,
+    let data = {
+        tableID : tableID,
+        familyID : fid,
         order : amounts,
         notes : notesTxt
     };
 
-    var options = {
+    let options = {
         method:"post",
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json"
         }
     };
-    var response = await fetch("/sendOrder", options);
-    var respdata = await response.json();
+    let response = await fetch("/registerOrder", options);
+    let respdata = await response.json();
     //console.log(respdata)
     reset();
 }
@@ -203,8 +203,8 @@ function reset() {
     document.getElementById("tableID").selectedIndex = 0;
     updateFamNames();
     document.getElementById("famName").selectedIndex = 0;
-    var counts = document.getElementsByClassName("count");
-    for(var i = 0; i<counts.length; i++) {
+    let counts = document.getElementsByClassName("count");
+    for(let i = 0; i<counts.length; i++) {
         counts[i].innerText = "0";
     }
     document.getElementById("notes").value = "";
