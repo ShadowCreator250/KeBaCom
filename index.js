@@ -95,7 +95,7 @@ function server1() {
 
     app.post("/getOpen",function(request, response) {
         let options = request.body;
-        orders.find({status:"open"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
+        orders.find({status:"open"}).sort({lastEdited: 1}).limit(options.limit).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
@@ -107,7 +107,7 @@ function server1() {
     });
     app.post("/getInProgress",function(request, response) {
         let options = request.body;
-        orders.find({status:"in-progress"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
+        orders.find({status:"in-progress"}).sort({lastEdited: 1}).limit(options.limit).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
@@ -119,7 +119,7 @@ function server1() {
     });
     app.post("/getReady",function(request, response) {
         let options = request.body;
-        orders.find({status:"ready"}).limit(options.limit).sort({LastEdited: 1}).exec((err, data) => {
+        orders.find({status:"ready"}).sort({lastEdited: 1}).limit(options.limit).exec((err, data) => {
             if(err) {
                 response.end();
                 return err;
