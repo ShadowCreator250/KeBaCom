@@ -8,17 +8,16 @@ function init() {
     tidselect = document.getElementById("tableID");
     famselect = document.getElementById("famName");
     list = document.getElementById("list");
-    getTables(); 
-    getItems();
+    inputTables(); 
+    inputItems();
 }
 
 async function getTables() {
     let response = await fetch("/getTables");
-    tables = await response.json();
-    inputTables();
+    return await response.json();
 }
-
-function inputTables() {
+async function inputTables() {
+    tables = await getTables();
     for(item of tables) {
         let o = document.createElement("option");
         o.value = item.id;
@@ -41,11 +40,11 @@ function updateFamNames() {
 
 async function getItems() {
     let response = await fetch("/getItems");
-    items = await response.json();
-    inputItems();
+    return await response.json();
 }
 
-function inputItems() {
+async function inputItems() {
+    items = await getItems();
     for(group of items) {
         let accorditem = document.createElement("div");
         accorditem.classList.add("accordionItem");
@@ -193,10 +192,8 @@ async function sendData() {
             "Content-Type": "application/json"
         }
     };
-    let response = await fetch("/registerOrder", options);
-    let respdata = await response.json();
-    //console.log(respdata)
     reset();
+    let response = await fetch("/registerOrder", options);
 }
 
 function reset() {

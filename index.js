@@ -46,7 +46,7 @@ this.rename = function(url, newUrl) {
 
 const fh = new FileHandler();
 
-const port = 3567;
+const port = 80;
 app.listen(port, () => console.log('>Server is listening on port ' + port + "."));
 app.use(express.static('./public/'));
 app.use(express.json({limit: "5mb"}));
@@ -88,9 +88,9 @@ function server1() {
         oID  = oID + 1;
         fh.replace("data/config.json", JSON.stringify(config));
 
-        response.contentType('application/json');
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.json({status: 200}); // 200 = ok/successful 
+        // response.contentType('application/json');
+        // response.setHeader("Access-Control-Allow-Origin", "*");
+        // response.json({status: 200}); // 200 = ok/successful 
     });
 
     app.post("/getOpen",function(request, response) {
@@ -129,7 +129,7 @@ function server1() {
             response.json(data);
         });
     });
-    app.get("/getAll", function handleData(request, response) {//server->client
+    app.post("/getAll", function handleData(request, response) {
         database.find({}, (err, data) => {
             if(err) {
                 response.end();

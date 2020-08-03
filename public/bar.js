@@ -1,48 +1,59 @@
-var now;
-var open, inProgress, ready;
+var openOrders, inProgressOrders, readyOrders;
 var openEle, inProgressEle, readyEle;
-var lastChangeTime;
-var config;
-console.log(lastChangeTime>0);
-function init() {
+var lastChangeTime = 0;
+var config = {};
+async function init() {
     openEle = document.getElementById("open");
     openEle = document.getElementById("in_progress");
     openEle = document.getElementById("ready");
 
-    getConfig();
-    update();
+    autoUpdate();
     setInterval(autoUpdate, 5000);
 }
 
-function autoUpdate() {
+async function autoUpdate() {
+    config = await getConfig();
     if(!lastChangeTime > 0) {
+        console.log(">Initial fetch made:");
         update();
         lastChangeTime = config.lastEdited;
     }
-    else if(checkForUpdate()) {
+    else if(config.lastEdited > lastChangeTime) {
+        lastChangeTime = config.lastEdited;
+        console.log(">Fetched source:");
         update();
     }
 }
-function update() {
-    getOpen();
-    getInProgress();
-    getReady();
-}
-async function getConfig() {
-    let response = await fetch("/getConfig");
-    config = await response.json();
-}
-function checkForUpdate() {
-    let r = false;
-    getConfig();
-    let temp = config.lastEdited;
-    if(temp > lastChangeTime) {
-        r = true;
-        lastChangeTime = temp;
+async function update() {
+    openOrders = await getOpen();
+    inProgressOrders = await getInProgress();
+    readyOrders = await getReady();
+    let now = new Date().getTime();
+    let dif = lastChangeTime - now;
+    let difInS = dif/1000;
+    let prefix = "";
+    let s = Math.floor(Math.abs((difInS)%60));
+    let m = Math.floor(Math.abs((difInS/60)%60));
+    let h = Math.floor(Math.abs((difInS/3600)%24));
+    let d = Math.floor(Math.abs(difInS/3600/24)%365);
+    if(difInS*-1 > 0) {
+        prefix = "-";
     }
-    return r;
+    else {
+        prefix = "+";
+    }
+    let obj = {
+        timestampNow: new Date(now).toLocaleString(),
+        timeSinceLastChange: (prefix + d + "d " + h + "h " + m + "m " + s + "s"),
+        timestampLastChange: new Date(lastChangeTime).toLocaleString()
+    }
+    console.log(">> ", obj, openOrders, inProgressOrders, readyOrders);
 }
 
+    async function getConfig() {
+    let response = await fetch("/getConfig");
+    return await response.json();
+}
 async function getOpen(entryLimit = 0) { //if no parameter is given, the default of 0 is taken
     if(typeof(entryLimit) != "number") {
         console.warn('The parameter is NaN. It was set to default.'); //antiError
@@ -56,9 +67,9 @@ async function getOpen(entryLimit = 0) { //if no parameter is given, the default
             "Content-Type": "application/json"
         }
     };
-    const response = await fetch("/getOpen", options);
-    let json = await response.json(response);
-    console.log(json);
+    let response = await fetch("/getOpen", options);
+    return await response.json();
+
 }
 async function getInProgress(entryLimit = 0) { //if no parameter is given, the default of 0 is taken
     if(typeof(entryLimit) != "number") {
@@ -73,9 +84,8 @@ async function getInProgress(entryLimit = 0) { //if no parameter is given, the d
             "Content-Type": "application/json"
         }
     };
-    const response = await fetch("/getInProgress", options);
-    let json = await response.json(response);
-    console.log(json);
+    let response = await fetch("/getInProgress", options);
+    return await response.json();
 }
 async function getReady(entryLimit = 0) { //if no parameter is given, the default of 0 is taken
     if(typeof(entryLimit) != "number") {
@@ -90,9 +100,8 @@ async function getReady(entryLimit = 0) { //if no parameter is given, the defaul
             "Content-Type": "application/json"
         }
     };
-    const response = await fetch("/getReady", options);
-    let json = await response.json(response);
-    console.log(json);
+    let response = await fetch("/getReady", options);
+    return await response.json(response);
 }
 
 function initOpen() {
