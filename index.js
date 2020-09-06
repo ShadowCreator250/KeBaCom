@@ -137,7 +137,7 @@ function server1() {
             }
             response.json(data);
         });
-    }); 
+    });
 }
 
 server1();

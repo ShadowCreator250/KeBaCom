@@ -1,0 +1,17 @@
+.stat_container {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+.stat_item {
+    display: block;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    width: 33,3%;
+    height: 100%;
+}
