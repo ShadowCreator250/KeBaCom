@@ -72,7 +72,7 @@ function server1() {
     });
     
     app.post("/registerOrder", function(request, response) {
-        let config = JSON.parse(fh.read("data/config.json"));
+        let config = JSON.parse(fh.read("./data/config.json"));
         let oID = config.nextOrderID;
         let timestamp = Date.now();
         let meta = {};
